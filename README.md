@@ -7,3 +7,4 @@ Google clone - React App:
 * React-Hooks
 * React-Context API
 * Material UI
+* Google-Search API
