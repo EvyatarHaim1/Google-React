@@ -25,7 +25,7 @@ function Search({ hideButtons = false }) {
     }
 
     return (
-        <Div>
+        <Div className="search">
           <form>
             <div className="search_input">
                 <SearchIcon  
