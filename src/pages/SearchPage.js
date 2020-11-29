@@ -13,9 +13,9 @@ import RoomIcon from '@material-ui/icons/Room';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 function SearchPage() {
-    const [ {term}, dispatch] = useStateValue();
-    // const { data } = useGoogleSearch(term); // Live APi call
-    const data = Response;
+    const [ {term='tesla'}, dispatch] = useStateValue();
+    const { data } = useGoogleSearch(term); // Live APi call
+    // const data = Response; // Mock API
 
     console.log(data)
     return (
@@ -69,6 +69,36 @@ function SearchPage() {
                  </div>
             </div>
             </div>
+            {term && (
+                <div className="searchPage_results">
+                    <p className="searchPage_resultsCount">
+                        About {data?.searchInformation.formattedTotalResults} results 
+                        ({data?.searchInformation.formattedSearchTime} seconds) for {term}
+                    </p>
+                    {data?.items.map(item => (
+                        <div className="searchPage_result"> 
+                            <a href={item.link}>
+                              {item.pagemap?.cse_image?.length > 0 && item.pagemap?.cse_image[0]?.src && (
+                                 <img
+                                      className="serachPage_resultImage"
+                                      src={item.pagemap?.cse_image?.length > 0 && 
+                                           item.pagemap?.cse_image[0]?.src}
+                                      alt=""
+                                 />
+                              )}
+                              {item.displayLink} ▽
+                            </a>
+                            <a className="searchPage_resultTitle"
+                               href={item.link}>
+                               <h2>{item.title}</h2> 
+                            </a>
+                            <p className="result_snippet">
+                                   {item.snippet}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            )}
         </Div>
     )
 }
@@ -140,5 +170,43 @@ const Div = styled.div`
 
 .searchPage_option a {
     margin-left: 5px;
+}
+
+.searchPage_result{
+    margin: 40px 0;
+}
+
+.searchPage_resultsCount{
+    color: #70757a;
+    font-size: 14px;
+}
+
+.searchPage_results{
+    max-width: 650px;
+    margin-top: 20px;
+    margin-left: 240px;
+    margin-bottom: 100px;
+}
+
+.searchPage_resultTitle{
+    text-decoration: none;
+    h2{
+        font-weight: 500;
+    }
+}
+
+.searchPage_resultTitle:hover{
+    text-decoration:underline;
+}
+
+.result_snippet{
+    margin-top: 10px;
+}
+
+.serachPage_resultImage{
+    object-fit: contain;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
 }
 `
