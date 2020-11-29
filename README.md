@@ -8,3 +8,5 @@ Google clone - React App:
 * React-Context API
 * Material UI
 * Google-Search API
+
+![alt text](https://github.com/EvyatarHaim1/Google-React/blob/main/src/viewScreen.png)
